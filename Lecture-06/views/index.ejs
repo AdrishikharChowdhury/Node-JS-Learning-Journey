@@ -51,7 +51,10 @@
               <div class="task w-100 bg-slate-800 rounded-2xl p-5 flex-grow">
                 <h1 class="text-white text-2xl tracking-tighter">
                   <%= val.title %></h1>
-                <a class="text-blue-500 inline-block mt-3" href="/note/<%= val.filename.split('/').pop().replace('.json', '') %>">Read more</a>
+                  <div class="w-full flex justify-between items-center">
+                    <a class="text-blue-500 inline-block mt-3" href="/note/<%= val.filename.split('/').pop().replace('.json', '') %>">Read more</a>
+                    <a class="text-blue-500 inline-block mt-3" href="/note/<%= val.filename %>">Edit</a>
+                  </div>
               </div>
             <% }); %>
           <% } else { %>
