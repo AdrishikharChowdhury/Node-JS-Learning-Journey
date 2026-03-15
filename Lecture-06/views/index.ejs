@@ -53,7 +53,7 @@
                   <%= val.title %></h1>
                   <div class="w-full flex justify-between items-center">
                     <a class="text-blue-500 inline-block mt-3" href="/note/<%= val.filename.split('/').pop().replace('.json', '') %>">Read more</a>
-                    <a class="text-blue-500 inline-block mt-3" href="/note/<%= val.filename %>">Edit</a>
+                    <a class="text-blue-500 inline-block mt-3" href="/edit/<%= val.filename.split('/').pop().replace('.json', '') %>">Edit</a>
                   </div>
               </div>
             <% }); %>
