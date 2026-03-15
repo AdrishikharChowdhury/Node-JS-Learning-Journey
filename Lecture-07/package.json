@@ -1,0 +1,24 @@
+{
+  "name": "lecture-07",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/AdrishikharChowdhury/Node-JS-Learning-Journey#readme",
+  "bugs": {
+    "url": "https://github.com/AdrishikharChowdhury/Node-JS-Learning-Journey/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdrishikharChowdhury/Node-JS-Learning-Journey.git"
+  },
+  "license": "ISC",
+  "author": "AdrishikharChowdhury",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "mongoose": "^9.3.0"
+  }
+}
