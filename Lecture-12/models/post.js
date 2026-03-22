@@ -12,7 +12,10 @@ const postSchema = mongoose.Schema({
   content: {
     title: String,
     details: String,
-    image: String,
+    image: {
+      buffer: Buffer,
+      mimetype: String
+    }
   },
   likes: [
     {

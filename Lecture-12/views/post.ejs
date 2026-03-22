@@ -39,7 +39,7 @@
       </nav>
       <div class="p-10 w-full h-full flex flex-col justify-center gap-6 items-center">
         <h1 class="text-4xl font-semibold">What's on your mind?</h1>
-        <form action="/post/create" class="flex flex-col w-2/7 justify-center items-start gap-6" method="post">
+        <form action="/post/create" class="flex flex-col w-2/7 justify-center items-start gap-6" method="post" enctype="multipart/form-data">
           <label class="flex flex-col justify-center gap-4 w-full" for="title">
             <p class="text-xl font-semibold">Title:</p>
             <input class="bg-mauve-800 w-full p-4 rounded-xl outline-none text-lg" type="text" name="title" placeholder="Enter Appropriate Title">
@@ -49,12 +49,13 @@
             <textarea class="bg-mauve-800 w-full h-50 p-4 rounded-xl outline-none text-lg resize-none" name="details" placeholder="Enter Appropriate Description"></textarea>
           </label>
           <label class="flex flex-col justify-center gap-4 w-full" for="image">
-            <p class="text-xl font-semibold">Image URL:</p>
-            <input class="bg-mauve-800 w-full p-4 rounded-xl outline-none text-lg" type="text" name="image" placeholder="Enter Appropriate Image URL">
-          </label>
+            <p class="text-xl font-semibold">Upload your Post Pic</p>
+            <input class="bg-mauve-800 w-full p-4 rounded-xl outline-none text-lg" type="file" name="image" id="imageInput" accept="image/*" placeholder="Image should be below 5MB" />
+        </label>
           <button class="py-4 px-6 text-xl self-center rounded-xl bg-mauve-500 hover:bg-mauve-700 cursor-pointer" type="submit">Create Post</button>
         </form>
       </div>
     </div>
+    <script src="/js/script.js"></script>
   </body>
 </html>

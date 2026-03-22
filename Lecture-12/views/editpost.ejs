@@ -49,9 +49,9 @@
             <textarea class="bg-mauve-800 w-full h-50 p-4 rounded-xl outline-none text-lg resize-none" name="details" placeholder="Enter Appropriate Description"><%=content.details%></textarea>
           </label>
           <label class="flex flex-col justify-center gap-4 w-full" for="image">
-            <p class="text-xl font-semibold">Image URL:</p>
-            <input class="bg-mauve-800 w-full p-4 rounded-xl outline-none text-lg" type="text" name="image" placeholder="Enter Appropriate Image URL" value="<%=content.image%>">
-          </label>
+            <p class="text-xl font-semibold">Upload your Post Pic</p>
+            <input class="bg-mauve-800 w-full p-4 rounded-xl outline-none text-lg" type="file" name="image" id="imageInput" accept="image/*" placeholder="Image should be below 5MB" value="data:<%= post.content.image.mimetype %>;base64,<%= post.content.image.buffer.toString('base64') %>" />
+        </label>
           <button class="py-4 px-6 text-xl self-center rounded-xl bg-mauve-500 hover:bg-mauve-700 cursor-pointer" type="submit">Edit Post</button>
         </form>
       </div>

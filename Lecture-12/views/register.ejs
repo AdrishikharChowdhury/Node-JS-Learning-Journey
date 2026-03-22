@@ -12,7 +12,7 @@
       class="bg-mauve-900 text-white flex-col gap-10 flex justify-center items-center w-full min-h-screen"
     >
       <h1 class="text-4xl font-bold">Sign Up</h1>
-      <form action="/create" class="flex flex-col w-2/7 justify-center items-start gap-6" method="post">
+      <form action="/create" enctype="multipart/form-data" class="flex flex-col w-2/7 justify-center items-start gap-6" method="post">
         <label class="flex flex-col justify-center gap-4 w-full" for="username">
             <p class="text-xl font-semibold">Username:</p>
             <input class="bg-mauve-800 w-full p-4 rounded-xl outline-none text-lg" type="text" name="username" placeholder="Enter Your Username" required>
@@ -33,9 +33,14 @@
             <p class="text-xl font-semibold">Password:</p>
             <input class="bg-mauve-800 w-full p-4 rounded-xl outline-none text-lg" type="password" name="password" placeholder="Enter Your Password" required>
         </label>
+        <label class="flex flex-col justify-center gap-4 w-full" for="pfp">
+          <p class="text-xl font-semibold">Upload your Profile Pic</p>
+          <input class="bg-mauve-800 w-full p-4 rounded-xl outline-none text-lg" type="file" name="pfp" id="imageInput" accept="image/*" placeholder="Image should be below 5MB" />
+        </label>
         <button class="py-4 px-6 text-xl self-center rounded-xl bg-mauve-500 hover:bg-mauve-700 cursor-pointer" type="submit">Sign Up</button>
       </form>
       <p class="font-lighter tracking-wider text-md" >Already Have an Account? <a href="/login" class="hover:border-b-2 text-mauve-500" >Click Here</a> To Login </p>
     </div>
+    <script src="/js/script.js"></script>
   </body>
 </html>

@@ -3,10 +3,15 @@ const path = require("path");
 const bcrypt = require("bcrypt");
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
+const multer=require("multer")
+const mongoose = require("mongoose");
+
+const upload=require("./config/multer")
 const userModel = require("./models/user");
 const postModel = require("./models/post");
 
 const app = express();
+mongoose.connect("mongodb://127.0.0.1:27017/miniproject");
 
 app.set("view engine", "ejs");
 app.use(express.json());
@@ -23,8 +28,9 @@ const isLoggedIn = (req, res, next) => {
   next();
 };
 
-app.post("/create", async (req, res) => {
+app.post("/create", upload.single('pfp'), async (req, res) => {
   const { username, name, age, email, password } = req.body;
+  const {buffer,mimetype}=req.file
   let user = await userModel.findOne({ email });
   if (user) return res.status(500).send("User Already Have an Account");
   bcrypt.genSalt(10, (err, salt) => {
@@ -35,6 +41,10 @@ app.post("/create", async (req, res) => {
         email,
         age,
         password: hash,
+        pfp:{
+          buffer,
+          mimetype
+        }
       });
       let token = jwt.sign({ email, userid: user._id }, "verySecretKey");
       res.cookie("token", token);
@@ -57,8 +67,9 @@ app.post("/login", async (req, res) => {
   });
 });
 
-app.post("/post/create", isLoggedIn, async (req, res) => {
+app.post("/post/create", isLoggedIn, upload.single('image') , async (req, res) => {
   const { userid, email } = req.user;
+  const {buffer,mimetype}=req.file
   let user = await userModel.findOne({ email });
   const { title, details, image } = req.body;
   let post = await postModel.create({
@@ -66,7 +77,10 @@ app.post("/post/create", isLoggedIn, async (req, res) => {
     content: {
       title,
       details,
-      image,
+      image:{
+        buffer,
+        mimetype
+      }
     },
   });
   user.posts.push(post._id);
@@ -88,22 +102,30 @@ app.post("/like/:id", isLoggedIn, async (req, res) => {
   res.redirect(referrer);
 });
 
-app.post("/post/edit/:id", isLoggedIn, async (req, res) => {
-  const id = req.params.id;
-  const { title, details, image } = req.body;
-  let post = await postModel.findOneAndUpdate(
-    { _id: id },
-    {
-      content: {
-        title,
-        details,
-        image,
-      },
-    },
-    { new: true },
-  );
-  res.redirect("/profile");
+app.post("/post/edit/:id", upload.single('image'), isLoggedIn, async (req, res) => {
+  const id = new mongoose.Types.ObjectId(req.params.id);
+  const { title, details } = req.body;
+  
+  let existingPost = await postModel.findById(id);
+  if (!existingPost) return res.status(404).send("Post not found");
+  
+  let updateData = {
+    date: new Date(),
+    content: {
+      title,
+      details,
+      
+      image: req.file ? {
+        buffer: req.file.buffer,
+        mimetype: req.file.mimetype
+      } : existingPost.content.image
+    }
+  };
+  
+  let post = await postModel.findByIdAndUpdate(id, updateData, { new: true });
+  res.redirect(`/profile/${post.user}`);
 });
+
 
 app.get("/delete/:id",isLoggedIn,async (req,res) => {
   const id=req.params.id;

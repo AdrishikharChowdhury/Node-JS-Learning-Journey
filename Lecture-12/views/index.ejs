@@ -44,21 +44,27 @@
           >Logout</a
         >
       </nav>
+      <div class="text-4xl flex justify-center items-center gap-4 self-start font-semibold mt-6 ml-6">
+        <img class="size-25 rounded-2xl border-2" src="data:<%= user.pfp.mimetype %>;base64,<%= user.pfp.buffer.toString('base64') %>" alt="pfp" />
+        <h1>Hello, <%= user.username %></h1>
+      </div>
       <% if (posts.length>0){ %>
           <div class="w-full h-full flex-col gap-10 flex justify-center items-center px-10 py-6">
-            <h1 class="text-4xl self-start font-semibold">Hello, <%= user.username %></h1>
           <% posts.reverse().forEach((post)=>{ %>
             <div
             class="w-1/2 p-8 flex flex-col justify-center items-start bg-mauve-800 rounded-xl gap-4"
           >
-          <p class="text-xl font-extralight italic">
-            Posted by, <%= post.user.name%> <a class="text-sm text-mauve-500" href="/profile/<%= post.user._id %>">@<%= post.user.username %></a>
-          </p>
+          <div class="text-xl font-extralight italic flex items-center gap-4">
+            <a href="/profile/<%= post.user._id %>">
+              <img class="rounded-full border-2 size-15 object-center" src="data:<%= user.pfp.mimetype %>;base64,<%= user.pfp.buffer.toString('base64') %>" alt="pfp" />
+            </a>
+            <%= post.user.name%> <a class="text-sm text-mauve-500" href="/profile/<%= post.user._id %>">@<%= post.user.username %></a>
+          </div>
             
             <p class="font-semibold text-2xl"><%= post.content.title %></p>
             <p class="text-lg whitespace-pre-wrap break-words"><%= post.content.details %></p>
             <img
-              src="<%= post.content.image %>"
+              src="data:<%= post.content.image.mimetype %>;base64,<%= post.content.image.buffer.toString('base64') %>"
               alt="image"
               class="object-center bg-mauve-900 rounded-xl"
             />
