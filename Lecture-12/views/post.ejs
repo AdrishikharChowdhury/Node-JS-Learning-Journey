@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div
+      class="bg-mauve-900 text-white flex-col flex justify-start items-center w-full h-screen"
+    >
+      <nav class="flex justify-between items-center bg-mauve-700 w-full p-5">
+        <ul
+          class="flex justify-center items-center gap-6 text-mauve-50 text-xl w-full"
+        >
+          <li>
+            <a href="/home" class="hover:border-b-2 font-light tracking-wider"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a href="/post" class="hover:border-b-2 font-light tracking-wider">
+              Post
+            </a>
+          </li>
+          <li>
+            <a
+              href="/profile"
+              class="hover:border-b-2 font-light tracking-wider"
+              >Profile</a
+            >
+          </li>
+        </ul>
+        <a href="/logout" class="hover:border-b-2 font-light tracking-wider"
+          >Logout</a
+        >
+      </nav>
+      <div class="p-10 w-full h-full flex flex-col justify-center gap-6 items-center">
+        <h1 class="text-4xl font-semibold">What's on your mind?</h1>
+        <form action="/post/create" class="flex flex-col w-2/7 justify-center items-start gap-6" method="post">
+          <label class="flex flex-col justify-center gap-4 w-full" for="title">
+            <p class="text-xl font-semibold">Title:</p>
+            <input class="bg-mauve-800 w-full p-4 rounded-xl outline-none text-lg" type="text" name="title" placeholder="Enter Appropriate Title">
+          </label>
+          <label class="flex flex-col justify-center gap-4 w-full" for="details">
+            <p class="text-xl font-semibold">Description:</p>
+            <textarea class="bg-mauve-800 w-full h-50 p-4 rounded-xl outline-none text-lg resize-none" name="details" placeholder="Enter Appropriate Description"></textarea>
+          </label>
+          <label class="flex flex-col justify-center gap-4 w-full" for="image">
+            <p class="text-xl font-semibold">Image URL:</p>
+            <input class="bg-mauve-800 w-full p-4 rounded-xl outline-none text-lg" type="text" name="image" placeholder="Enter Appropriate Image URL">
+          </label>
+          <button class="py-4 px-6 text-xl self-center rounded-xl bg-mauve-500 hover:bg-mauve-700 cursor-pointer" type="submit">Create Post</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
